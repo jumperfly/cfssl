@@ -1,0 +1,20 @@
+{
+  "package": {
+    "name": "cfssl",
+    "repo": "yum",
+    "subject": "jumperfly",
+    "desc": "cfssl",
+    "vcs_url": "https://github.com/jumperfly/cfssl.git"
+  },
+
+  "version": {
+    "name": "1.3.2"
+  },
+
+  "files": [{
+      "includePattern": "bin/rpmbuild/RPMS/x86_64/(cfssl-.*\\.rpm)",
+      "uploadPattern": "cfssl/latest/$1"
+    }
+  ],
+  "publish": true
+}

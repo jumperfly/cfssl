@@ -1,0 +1,19 @@
+sudo: required
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    - /^v\d+/
+
+script:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then ./build.sh; fi
+
+deploy:
+  provider: bintray
+  file: bintray-descripor.json
+  user: $BINTRAY_USERNAME
+  key: $BINTRAY_APIKEY
+  
