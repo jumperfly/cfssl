@@ -13,7 +13,7 @@ script:
 
 deploy:
   provider: bintray
-  file: bintray-descripor.json
+  file: bintray-descriptor.json
   user: $BINTRAY_USERNAME
   key: $BINTRAY_APIKEY
   
