@@ -18,7 +18,7 @@ cd ..
 echo "########## Build cfssl ##########"
 for cmd in cfssl cfssljson; do
   echo -n "Building $cmd... "
-  docker run --rm -v $(pwd)/cfssl:/go/src/github.com/cloudflare/cfssl -v $(pwd)/bin/go/usr/bin:/go/bin golang:1.11.2-stretch go install github.com/cloudflare/cfssl/cmd/$cmd
+  docker run --rm -v $(pwd)/cfssl:/go/src/github.com/cloudflare/cfssl -v $(pwd)/bin/go/usr/bin:/go/bin golang:1.11.2 go install github.com/cloudflare/cfssl/cmd/$cmd
   echo done.
 done
 
