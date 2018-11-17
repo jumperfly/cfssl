@@ -1,7 +1,10 @@
 #!/bin/bash
 
-RPM_RELEASE=$1
-echo "########## Starting build for release $RPM_RELEASE ##########"
+export RPM_RELEASE=$1
+export RPM_VERSION=1.3.2
+export YUM_PATH=latest
+
+echo "########## Starting build for version $RPM_VERSION-$RPM_RELEASE ##########"
 
 echo "########## Clean and prepare build directory ##########"
 if [ -e cfssl ]; then
@@ -15,7 +18,7 @@ mkdir -p bin/go/usr/bin
 echo "########## Downoad cfssl sources ##########"
 git clone https://github.com/cloudflare/cfssl.git
 cd cfssl
-git checkout 1.3.2
+git checkout $RPM_VERSION
 cd ..
 
 echo "########## Build cfssl ##########"
@@ -33,4 +36,8 @@ docker run --rm -v $(pwd):/build jumperfly/rpmbuild:v4.11.3_1 \
   rpmbuild -bb --buildroot /build/bin/go \
   --define "_topdir /build/bin/rpmbuild" \
   --define "_release $RPM_RELEASE" \
+  --define "_version $RPM_VERSION" \
   /build/cfssl.spec
+
+echo "########## Generate deployment properties ##########"
+envsubst < bintray-descriptor.json > bin/bintray-descriptor.json

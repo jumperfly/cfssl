@@ -1,5 +1,5 @@
 Name:           cfssl
-Version:        1.3.2
+Version:        %{_version}
 Release:        %{_release}%{?dist}
 Summary:        cfssl
 

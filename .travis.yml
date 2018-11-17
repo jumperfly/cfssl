@@ -10,10 +10,13 @@ branches:
 
 script:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then ./build.sh $TRAVIS_BUILD_NUMBER; fi
+  - if [[ "$TRAVIS_BRANCH" =~ ^v[0-9] ]]; then ./promote.sh ${TRAVIS_BRANCH:1}; fi
 
 deploy:
+  on:
+    all_branches: true
   provider: bintray
-  file: bintray-descriptor.json
+  file: bin/bintray-descriptor.json
   user: $BINTRAY_USERNAME
   key: $BINTRAY_APIKEY
-  skip_cleanup: true  
+  skip_cleanup: true
