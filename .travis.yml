@@ -16,4 +16,4 @@ deploy:
   file: bintray-descriptor.json
   user: $BINTRAY_USERNAME
   key: $BINTRAY_APIKEY
-  
+  skip_cleanup: true  
