@@ -1,6 +1,6 @@
 {
   "package": {
-    "name": "cfssl",
+    "name": "cfssl/latest",
     "repo": "yum",
     "subject": "jumperfly",
     "desc": "cfssl",
