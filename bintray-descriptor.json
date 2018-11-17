@@ -4,7 +4,8 @@
     "repo": "yum",
     "subject": "jumperfly",
     "desc": "cfssl",
-    "vcs_url": "https://github.com/jumperfly/cfssl.git"
+    "vcs_url": "https://github.com/jumperfly/cfssl.git",
+    "license": "BSD 2-Clause"
   },
 
   "version": {
