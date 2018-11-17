@@ -9,7 +9,7 @@ branches:
     - /^v\d+/
 
 script:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then ./build.sh; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then ./build.sh $TRAVIS_BUILD_NUMBER; fi
 
 deploy:
   provider: bintray
