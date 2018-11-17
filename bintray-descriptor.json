@@ -5,7 +5,7 @@
     "subject": "jumperfly",
     "desc": "cfssl",
     "vcs_url": "https://github.com/jumperfly/cfssl.git",
-    "license": "BSD 2-Clause"
+    "licenses": ["BSD 2-Clause"]
   },
 
   "version": {
