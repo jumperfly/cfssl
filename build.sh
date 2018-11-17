@@ -13,7 +13,7 @@ fi
 if [ -e bin ]; then
   rm -rf bin
 fi
-mkdir -p bin/go/usr/bin
+mkdir -p bin/go/{usr/bin,etc/cfssl}
 
 echo "########## Downoad cfssl sources ##########"
 git clone https://github.com/cloudflare/cfssl.git
@@ -30,6 +30,7 @@ for cmd in cfssl cfssljson; do
     go install github.com/cloudflare/cfssl/cmd/$cmd
   echo done.
 done
+cp cfssl-config.json bin/go/etc/cfssl/config.json
 
 echo "########## Build rpm ##########"
 docker run --rm -v $(pwd):/build jumperfly/rpmbuild:v4.11.3_1 \

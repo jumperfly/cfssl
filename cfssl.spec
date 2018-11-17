@@ -12,3 +12,5 @@ cfssl RPM wrapper - https://github.com/cloudflare/cfssl
 %files
 /usr/bin/cfssl
 /usr/bin/cfssljson
+/etc/cfssl
+%config(noreplace) /etc/cfssl/config.json
