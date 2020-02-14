@@ -26,7 +26,7 @@ for cmd in cfssl cfssljson; do
   echo -n "Building $cmd... "
   docker run --rm -e RPM_RELEASE=$RPM_RELEASE \
     -v $(pwd)/cfssl:/go/src/github.com/cloudflare/cfssl \
-    -v $(pwd)/bin/go/usr/bin:/go/bin golang:1.13.8 \
+    -v $(pwd)/bin/go/usr/bin:/go/bin golang:1.13.8-stretch \
     go install github.com/cloudflare/cfssl/cmd/$cmd
   echo done.
 done

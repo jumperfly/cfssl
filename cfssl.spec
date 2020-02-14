@@ -6,8 +6,6 @@ Summary:        cfssl
 License:	BSD 2-Clause "Simplified" License
 URL:            https://github.com/jumperfly/cfssl-rpm
 
-%define __requires_exclude ^libc.so.*$
-
 %description
 cfssl RPM wrapper - https://github.com/cloudflare/cfssl
 
