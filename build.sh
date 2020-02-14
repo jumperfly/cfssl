@@ -8,12 +8,12 @@ echo "########## Starting build for version $RPM_VERSION-$RPM_RELEASE ##########
 
 echo "########## Clean and prepare build directory ##########"
 if [ -e cfssl ]; then
-  rm -rf cfssl
+  sudo rm -rf cfssl
 fi
 if [ -e bin ]; then
-  rm -rf bin
+  sudo rm -rf bin
 fi
-mkdir -p bin/go/{usr/bin,etc/cfssl}
+mkdir -p bin/rpmroot/{usr/bin,etc/cfssl}
 
 echo "########## Downoad cfssl sources ##########"
 git clone https://github.com/cloudflare/cfssl.git
@@ -22,19 +22,16 @@ git checkout v$RPM_VERSION
 cd ..
 
 echo "########## Build cfssl ##########"
-for cmd in cfssl cfssljson; do
-  echo -n "Building $cmd... "
-  docker run --rm -e RPM_RELEASE=$RPM_RELEASE \
-    -v $(pwd)/cfssl:/go/src/github.com/cloudflare/cfssl \
-    -v $(pwd)/bin/go/usr/bin:/go/bin golang:1.13.8-stretch \
-    go install github.com/cloudflare/cfssl/cmd/$cmd
-  echo done.
-done
-cp cfssl-config.json bin/go/etc/cfssl/config.json
+docker run --rm -e RPM_RELEASE=$RPM_RELEASE \
+  -v $(pwd)/cfssl:/cfssl \
+  -w /cfssl \
+  golang:1.13.8 make
+cp cfssl/bin/{cfssl,cfssljson} bin/rpmroot/usr/bin
+cp cfssl-config.json bin/rpmroot/etc/cfssl/config.json
 
-echo "########## Build rpm ##########"
+#echo "########## Build rpm ##########"
 docker run --rm -v $(pwd):/build jumperfly/rpmbuild:v4.11.3_1 \
-  rpmbuild -bb --buildroot /build/bin/go \
+  rpmbuild -bb --buildroot /build/bin/rpmroot \
   --define "_topdir /build/bin/rpmbuild" \
   --define "_release $RPM_RELEASE" \
   --define "_version $RPM_VERSION" \
