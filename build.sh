@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export RPM_RELEASE=$1
-export RPM_VERSION=1.4.1
+export RPM_VERSION=1.5.0
 export YUM_PATH=latest
 
 echo "########## Starting build for version $RPM_VERSION-$RPM_RELEASE ##########"
@@ -25,7 +25,7 @@ echo "########## Build cfssl ##########"
 docker run --rm -e RPM_RELEASE=$RPM_RELEASE \
   -v $(pwd)/cfssl:/cfssl \
   -w /cfssl \
-  golang:1.13.8 make
+  golang:1.12.17-stretch make
 cp cfssl/bin/{cfssl,cfssljson} bin/rpmroot/usr/bin
 cp cfssl-config.json bin/rpmroot/etc/cfssl/config.json
 
